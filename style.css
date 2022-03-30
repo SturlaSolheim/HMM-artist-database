@@ -1,0 +1,98 @@
+body {
+   background-color:bisque;
+   
+}
+
+.container-forside {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 2vw;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    height: 95vh;
+    width: auto;
+   justify-content: center;
+   align-content: center;
+
+
+}
+.item-overskrift{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 5;
+    background-color: rgba(140, 233, 238, 0.345);
+    border-radius: 10%;
+}
+
+.item-1{
+    background-color: lightpink;
+
+    
+}
+
+.item-2{
+    background-color: aliceblue;
+    
+}
+
+.item-3{
+    background-color: darkseagreen;
+    
+}
+
+.item-4{
+    background-color: lightblue;
+    
+}
+
+.item-5{
+    background-color: plum;
+    
+}
+
+.item-6{
+    background-color: salmon;
+    
+}
+
+.item-7{
+    background-color: lightskyblue;
+    
+}
+
+.item-8{
+    background-color:lightgreen;
+    
+    
+}
+
+p {
+    text-align: center;
+}
+
+.item {
+    border-color: black;
+    border-radius: 23px;
+    border-style: groove;
+
+}
+
+
+h1 {
+    text-align: center;
+
+}
+
+.item.img.thumb{
+    width: 200px;
+    height: 200px;
+}
+
+#submit{
+ background-color: blue;
+}
+
+
+
