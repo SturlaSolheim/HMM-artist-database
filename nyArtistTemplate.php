@@ -1,8 +1,10 @@
 <?php
 include("start.php");
 
-$artistMedPHP=str_replace("_", " ", basename($_SERVER['PHP_SELF']));
-$artist=str_replace(".php", "", $artistMedPHP);
+$artistMedPHP=str_replace("_", " ", basename($_SERVER['PHP_SELF']));  //Finner artistnavnet via linken og tar vekk understreker
+$artistMedMappe=str_replace(".php", "", $artistMedPHP);//Tar vekk .php
+$artist=str_replace("artister/", "", $artistMedMappe);//Tar vekk mappevisningen, altså /artister. Så står man igjen med bare artistnavnet
+
 ?>
 
 

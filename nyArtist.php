@@ -52,8 +52,8 @@ if (isset($_POST["submit"])){
 
         print substr($filtype, 6);
 
-        $nyPHP=fopen($artistNavn. ".php", "a"); //Lager ny artist php fil
-        $nyPHP=fopen($artistNavn. "Dynamisk". ".php", "a"); //Lager ny dynamisk artist php fil som lister opp albumene til artisten
+        $nyPHP=fopen("artister/" . $artistNavn. ".php", "a"); //Lager ny artist php fil
+        $nyPHPAlbum=fopen($artistNavn. "Dynamisk". ".php", "a"); //Lager ny dynamisk artist php fil som lister opp albumene til artisten
         fwrite($nyPHP, "<?php include('nyArtistTemplate.php');?>");
  
 

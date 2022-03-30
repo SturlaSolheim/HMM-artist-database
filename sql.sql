@@ -33,3 +33,12 @@ CREATE TABLE IF NOT EXISTS `HMMDB`.`Spor` (
     REFERENCES `HMMDB`.`Album` (`AlbumNr`)
 );
 
+
+
+DROP TABLE IF EXISTS `HMMDB`.`Bruker` ;
+
+CREATE TABLE IF NOT EXISTS `HMMDB`.`Bruker` (
+  `Brukernavn` VARCHAR(45),
+  `Passord` VARCHAR(45),
+  PRIMARY KEY (`Brukernavn`),
+);

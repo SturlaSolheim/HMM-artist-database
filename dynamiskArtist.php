@@ -25,7 +25,7 @@ for ($r=1;$r<=$antallRader;$r++) {
     $rad=mysqli_fetch_array($sqlResultat);
 $artist=$rad["Artistnavn"]; 
 
-$artistLink=str_replace(" ", "", $artist) . ".php";
+$artistLink="artister/" . str_replace(" ", "", $artist) . ".php";
 $artistVistNavn=str_replace("_", " ", $artist);
 
 //printen for hver artist
