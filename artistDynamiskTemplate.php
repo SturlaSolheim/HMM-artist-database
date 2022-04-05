@@ -29,7 +29,7 @@ $albumLink=str_replace(" ", "", $albumNavn) . ".php";
 $albumVistNavn=str_replace("_", " ", $albumNavn);
 
 //printen for hver artist
-    print ("<div class='item-$r item'> <p><a href='$albumLink'> <img src='bilder/$albumNavn.jpeg' style='width:200px;height:200px;'> </a><br> $albumVistNavn</p> <br> <input id='gjem' type='checkbox' name='$albumNavn' value='$albumNavn'> </div>");
+    print ("<div class='item-$r item'> <p><a href='$albumLink'> <img src='bilder/$albumNavn.jpeg' style='width:auto;max-height:200px;'> </a><br> $albumVistNavn</p> <br> <input id='gjem' type='checkbox' name='$albumNavn' value='$albumNavn'> </div>");
 }
 
 

@@ -42,3 +42,15 @@ CREATE TABLE IF NOT EXISTS `HMMDB`.`Bruker` (
   `Passord` VARCHAR(45),
   PRIMARY KEY (`Brukernavn`),
 );
+
+
+CREATE TABLE IF NOT EXISTS `HMMDB`.`Lenke` (
+  `Artistside` VARCHAR(45) NULL,
+  `Albumside` VARCHAR(45) NULL,
+  `Bilde` VARCHAR(45) NULL,
+  `ISRC` VARCHAR(45) NOT NULL,
+  `AlbumNr` INT NULL,
+  PRIMARY KEY (`ISRC`),
+    FOREIGN KEY (`AlbumNr`)
+    REFERENCES `HMMDB`.`Album` (`AlbumNr`)
+);

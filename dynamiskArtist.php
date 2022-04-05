@@ -25,11 +25,14 @@ for ($r=1;$r<=$antallRader;$r++) {
     $rad=mysqli_fetch_array($sqlResultat);
 $artist=$rad["Artistnavn"]; 
 
-$artistLink="artister/" . str_replace(" ", "", $artist) . ".php";
+$artistLink=str_replace(" ", "", $artist) . ".php";
 $artistVistNavn=str_replace("_", " ", $artist);
 
 //printen for hver artist
-    print ("<div class='item-$r item'> <p><a href='$artistLink'> <img src='bilder/$artist.jpeg' style='width:200px;height:200px;'> </a><br> $artistVistNavn</p> <br> <input id='gjem' type='checkbox' name='$artist' value='$artist'> </div>");
+    print ("<div class='item-$r item'> <p>
+    <a href='$artistLink'> <img src='/bilder/$artist.jpeg' style='width:200px;height:200px;'> </a>
+    <br> $artistVistNavn</p> <br> 
+    <input class='check' type='checkbox' style='display: none;' name='artistCheckbox[]' value='$artist'> </div>");
 }
 
 

@@ -52,13 +52,16 @@ if (isset($_POST["submit"])){
 
         print substr($filtype, 6);
 
-        $nyPHP=fopen("artister/" . $artistNavn. ".php", "a"); //Lager ny artist php fil
-        $nyPHPAlbum=fopen($artistNavn. "Dynamisk". ".php", "a"); //Lager ny dynamisk artist php fil som lister opp albumene til artisten
+        $nyPHP=fopen($artistNavn. ".php", "a"); //Lager ny artist php fil
+
         fwrite($nyPHP, "<?php include('nyArtistTemplate.php');?>");
  
 
 
-        fclose($nyPHP);
+       
+
+        $nyPHPAlbum=fopen($artistNavn. "Dynamisk". ".php", "a"); //Lager ny dynamisk artist php fil som lister opp albumene til artisten
+        fclose($nyPHPAlbum);
 
         //INSERT artist inn i databasen
         $sqlINSERT="INSERT INTO Artist (Artistnavn) VALUES ('$artistNavn');";
