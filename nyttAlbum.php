@@ -2,7 +2,7 @@
 include("start.php");
 ?>
 
-<form method="POST" action="registrerSanger.php" name="nyttAlbumForm" enctype="multipart/form-data">
+<form method="POST" action="nyttAlbum.php" name="nyttAlbumForm" enctype="multipart/form-data">
         Artist<select name="valgtArtist">
         <?php
     include("dbTilkobling.php");
@@ -30,6 +30,34 @@ include("start.php");
         <input type="submit" name="submit" value="Videre">
 
 </form>
+
+<?php
+
+if (isset($_POST["submit"])){
+
+
+session_start();
+
+$_SESSION["antallSanger"]=$_POST["antallSanger"];
+$_SESSION["albumNavn"]=$_POST["albumNavn"];
+$_SESSION["valgtArtist"]=$_POST["valgtArtist"];
+$_SESSION["albumnummer"]=$_POST["albumnummer"];
+
+
+//Filbehandling av albumcover---------------------------------------------------------------
+$_SESSION["filnavn"]=$_FILES ["albumBilde"]["name"];  // filnavn på opplastet fil  
+$_SESSION["filtype"]=$_FILES ["albumBilde"]["type"];  // filtype på opplastet fil 
+$_SESSION["filstorrelse"]=$_FILES ["albumBilde"]["size"];  // filstørrelse på opplastet fil  
+$_SESSION["tmpNavn"]=$_FILES ["albumBilde"]["tmp_name"];    // midlertidig navn på opplastet fil 
+$_SESSION["nyttnavn"]="bilder/" .$albumTittel ."." . substr($filtype, 6);  // mappe- og filnavn på opplastet fil 
+//--------------------------------------------------------------------------------------------
+
+
+print("<meta http-equiv='refresh' content='0;url=registrerSanger.php'>"); 
+
+}
+
+?>
 
 <?php
 include("slutt.php");
