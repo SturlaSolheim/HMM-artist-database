@@ -5,7 +5,7 @@
 include("dbTilkobling.php");
 
 
-$sqlSELECT="SELECT Albumnavn FROM Album WHERE Album.Artistnavn=$artist;"; 
+$sqlSELECT="SELECT * FROM Album WHERE Album.Artistnavn='$artist';"; 
 
 $sqlResultat=mysqli_query($db, $sqlSELECT);
 
@@ -23,7 +23,7 @@ $antallRader=mysqli_num_rows($sqlResultat); //Henter antall artister
 //Lager <div> boksene for hver artist i en loop
 for ($r=1;$r<=$antallRader;$r++) {
     $rad=mysqli_fetch_array($sqlResultat);
-$albumNavn=$rad["Albumnavn"]; 
+$albumNavn=$rad["AlbumNavn"]; 
 
 $albumLink=str_replace(" ", "", $albumNavn) . ".php";
 $albumVistNavn=str_replace("_", " ", $albumNavn);

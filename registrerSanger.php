@@ -36,7 +36,7 @@ $nyttnavn=$_SESSION["nyttnavn"];  // mappe- og filnavn på opplastet fil
 
 <?php
 if (isset($_POST["submit"])){
-    move_uploaded_file($tmpnavn,$nyttnavn);
+
     include("dbTilkobling.php");
     $sqlINSERTalbum="INSERT INTO Album (AlbumNavn, AlbumNr, ArtistNavn) VALUES ('$albumTittel', '$albumNr', '$artistnavn');";
 
@@ -57,8 +57,9 @@ if (isset($_POST["submit"])){
         
 
             }
-            
+
 }
+
    print("<meta http-equiv='refresh' content='0;url=index.php'>"); 
 }
 ?>

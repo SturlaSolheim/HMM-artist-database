@@ -42,15 +42,18 @@ $_SESSION["antallSanger"]=$_POST["antallSanger"];
 $_SESSION["albumNavn"]=$_POST["albumNavn"];
 $_SESSION["valgtArtist"]=$_POST["valgtArtist"];
 $_SESSION["albumnummer"]=$_POST["albumnummer"];
+$albumTittel=$_POST["albumNavn"];
 
 
 //Filbehandling av albumcover---------------------------------------------------------------
-$_SESSION["filnavn"]=$_FILES ["albumBilde"]["name"];  // filnavn på opplastet fil  
-$_SESSION["filtype"]=$_FILES ["albumBilde"]["type"];  // filtype på opplastet fil 
-$_SESSION["filstorrelse"]=$_FILES ["albumBilde"]["size"];  // filstørrelse på opplastet fil  
-$_SESSION["tmpNavn"]=$_FILES ["albumBilde"]["tmp_name"];    // midlertidig navn på opplastet fil 
-$_SESSION["nyttnavn"]="bilder/" .$albumTittel ."." . substr($filtype, 6);  // mappe- og filnavn på opplastet fil 
+$filnavn=$_FILES["albumBilde"]["name"];  // filnavn på opplastet fil  
+$filtype=$_FILES["albumBilde"]["type"];  // filtype på opplastet fil 
+$filstorrelse=$_FILES["albumBilde"]["size"];  // filstørrelse på opplastet fil  
+$tmpnavn=$_FILES["albumBilde"]["tmp_name"];    // midlertidig navn på opplastet fil 
+$nyttnavn="bilder/" .$albumTittel ."." . substr($filtype, 6);  // mappe- og filnavn på opplastet fil 
 //--------------------------------------------------------------------------------------------
+
+move_uploaded_file($tmpnavn,$nyttnavn);
 
 
 print("<meta http-equiv='refresh' content='0;url=registrerSanger.php'>"); 
