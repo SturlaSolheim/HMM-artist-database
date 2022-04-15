@@ -1,4 +1,6 @@
 <?php
+//Tilkobling til databasen
+
 $host="localhost";
 $user="root";
 $password="root";

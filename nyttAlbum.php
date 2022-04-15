@@ -1,10 +1,19 @@
 <?php
+//Denne filen brukes for å registrere informasjon om nytt album, informasjon
+//om sangene i albumene blir registrert i registrerSanger.php 
 include("start.php");
 ?>
+
+
+
+
+
 
 <form method="POST" action="nyttAlbum.php" name="nyttAlbumForm" enctype="multipart/form-data">
         Artist<select name="valgtArtist">
         <?php
+//-------------------------------------------------------------
+//Denne delen blir brukt for å generere listebokser av hver artist i databasen
     include("dbTilkobling.php");
 
 
@@ -20,6 +29,7 @@ include("start.php");
 
         print ("<option value=$artistNavn>$artistNavn</option>");
     }
+//---------------------------------------------------------------
 ?>
 
         </select> <br>
@@ -31,18 +41,25 @@ include("start.php");
 
 </form>
 
+
+
+
+
+
+
 <?php
 
 if (isset($_POST["submit"])){
-
-
+//-------------------------------------------------
+//Åpner session for å ta med informasjon om albumet videre inn i registrerSanger.php
 session_start();
-
 $_SESSION["antallSanger"]=$_POST["antallSanger"];
 $_SESSION["albumNavn"]=$_POST["albumNavn"];
 $_SESSION["valgtArtist"]=$_POST["valgtArtist"];
 $_SESSION["albumnummer"]=$_POST["albumnummer"];
 $albumTittel=$_POST["albumNavn"];
+//--------------------------------------------------
+
 
 
 //Filbehandling av albumcover---------------------------------------------------------------
@@ -53,10 +70,10 @@ $tmpnavn=$_FILES["albumBilde"]["tmp_name"];    // midlertidig navn på opplastet
 $nyttnavn="bilder/" .$albumTittel ."." . substr($filtype, 6);  // mappe- og filnavn på opplastet fil 
 //--------------------------------------------------------------------------------------------
 
-move_uploaded_file($tmpnavn,$nyttnavn);
+move_uploaded_file($tmpnavn,$nyttnavn); //flytter bildefil med nytt navn inn i /bilder mappe
 
 
-print("<meta http-equiv='refresh' content='0;url=registrerSanger.php'>"); 
+print("<meta http-equiv='refresh' content='0;url=registrerSanger.php'>");  //Flytter oss videre til registrerSanger.php
 
 }
 

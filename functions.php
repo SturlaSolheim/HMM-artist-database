@@ -1,11 +1,13 @@
 <?php
+//Denne filen inneholder funksjoner som brukes
+
 function kunFiltype($filtype){
     
 }
 
 
 
-
+//Denne funksjonen brukes for å lage 'form' i registrerSanger.php
 function lagSangForm($antall){
     $r=1;
     while($r<=$antall){

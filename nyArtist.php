@@ -1,4 +1,6 @@
 <?php
+//Denne filen brukes for å lage nye artister
+
 include("start.php");
 ?>
 
