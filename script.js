@@ -15,6 +15,9 @@ var values = (function() {
 */
 
 
+
+
+/*Toggle checkboksene på artistboksene og albumboksene*/
 $(document).ready(function(){
     $("#slettArtister").click(function(){
       $(":checkbox").toggle();

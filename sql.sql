@@ -54,3 +54,9 @@ CREATE TABLE IF NOT EXISTS `HMMDB`.`Lenke` (
     FOREIGN KEY (`AlbumNr`)
     REFERENCES `HMMDB`.`Album` (`AlbumNr`)
 );
+
+
+
+/**/
+
+
