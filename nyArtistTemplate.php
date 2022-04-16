@@ -13,7 +13,7 @@ $artist=str_replace("artister/", "", $artistMedMappe);//Tar vekk mappevisningen,
 <h2> <a href="index.php">Tilbake</a></h2>
 
 <!-- 'form' blir igjen brukt over hele containeren for å kunne slette album til slutt-->
-<form method="POST" action="index.php">
+<form method="POST" action="nyArtistTemplate.php">
     <div class="container-forside">
         
         <div class="item-overskrift item"><p>Albumene til <?php print $artist;?> </p></div>
@@ -52,6 +52,8 @@ $artist=str_replace("artister/", "", $artistMedMappe);//Tar vekk mappevisningen,
 if(isset($_POST["submit"])){
     $valgteAlbum=$_POST["albumCheckbox"]; //Et array med alle checked checkbokser
 
+
+/*    
 //----------------------------------------------------------------------------
 //En loop for å lage et  array som inneholder albumnummer
 $albumNummer = [];
@@ -66,44 +68,42 @@ $albumNummer = [];
             array_push($albumNummer, $dbAlbumNummer);//Pusher albumnummer til array
     }
 //-------------------------------------------------------------------------------------------------------
-
+*/
 
 
 
  //----------------------------------------------------------------------
-    foreach($albumNummer as $num){ //Loop for å slette spor fra database 
+    foreach($valgteAlbum as $num){ //Loop for å slette spor fra database 
         //Slette spor fra databasen
-        include("dbTilkobling.php");
-                $sqlDELETEspor="DELETE FROM Spor WHERE Album.AlbumNr='$num';";
+            include("dbTilkobling.php");
+
+        
+                $sqlDELETEspor="DELETE FROM Spor WHERE Spor.AlbumNr='$num';";
                 mysqli_query($db, $sqlDELETEspor);
-    }
- //----------------------------------------------------------------------
 
-
-
-
-
- //----------------------------------------------------------------------
-    foreach($valgteAlbum as $arts){ //Loop for å slette album fra database
-       //Sletter album fra databasen
-       include("dbTilkobling.php");
-
-                $sqlDELETE="DELETE FROM Album WHERE Album.AlbumNavn='$arts';";
+                $sqlDELETE="DELETE FROM Album WHERE Album.AlbumNr='$num';";
                 mysqli_query($db, $sqlDELETE); //sletter filer fra databasen
     }
  //----------------------------------------------------------------------
 
 
- 
-
+   
 
  //------------------------------------------------------------------------
 
     foreach ($valgteAlbum as $arts){
 
-                $bildelink="/bilder" ."/" . $arts . "jpeg";
-                $artistlink=$arts . ".php";
-                $artistDynamiskLink=$arts . "Dynamisk.php";
+        include("dbTilkobling.php");
+        $sqlFinn="SELECT * FROM Album WHERE Album.AlbumNr='$arts';";
+        $resultat=mysqli_query($db, $sqlFinn);
+        $rad=mysqli_fetch_array($resultat);
+        $albumNavn=$rad["AlbumNavn"];
+//--------------Finner navnet på albumet fra albumNr
+
+
+                $bildelink="/bilder" ."/" . $albumNavn . "jpeg";
+                $artistlink=$albumNavn . ".php";
+                $artistDynamiskLink=$albumNavn . "Dynamisk.php";
 
                 unlink($bildelink);
                 unlink($artistlink);

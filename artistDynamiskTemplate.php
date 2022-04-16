@@ -24,6 +24,7 @@ $antallRader=mysqli_num_rows($sqlResultat); //Henter antall album
 for ($r=1;$r<=$antallRader;$r++) {
     $rad=mysqli_fetch_array($sqlResultat);
 $albumNavn=$rad["AlbumNavn"]; 
+$albumNr=$rad["AlbumNr"];
 
 $albumLink=str_replace(" ", "", $albumNavn) . ".php";
 $albumVistNavn=str_replace("_", " ", $albumNavn);
@@ -31,7 +32,7 @@ $albumVistNavn=str_replace("_", " ", $albumNavn);
 //printen for hvert album
     print ("<div class='item-$r item'> <p><a href='$albumLink'> <img src='bilder/$albumNavn.jpeg' style='width:auto;max-height:200px;'> </a>
     <br> $albumVistNavn</p> <br>
-     <input class='check' type='checkbox' style='display: none;' name='albumCheckbox[]' value='$albumNavn'> </div>");
+     <input class='check' type='checkbox' style='display: none;' name='albumCheckbox[]' value='$albumNr'> </div>");
 }
 
 
