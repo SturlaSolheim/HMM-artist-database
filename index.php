@@ -57,7 +57,7 @@ if(isset($_POST["submit"])){
                 $sqlDELETE="DELETE FROM Artist WHERE Artist.Artistnavn='$arts';";
                 mysqli_query($db, $sqlDELETE); //sletter filer fra databasen
 
-                $bildelink="/bilder" ."/" . $arts . "jpeg";
+                $bildelink="bilder" ."/" . $arts . ".jpeg";
                 $artistlink=$arts . ".php";
                 $artistDynamiskLink=$arts . "Dynamisk.php";
 

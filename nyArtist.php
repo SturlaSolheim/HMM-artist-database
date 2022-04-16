@@ -62,13 +62,17 @@ if (isset($_POST["submit"])){
 
        
 
-        $nyPHPAlbum=fopen($artistNavn. "Dynamisk". ".php", "a"); //Lager ny dynamisk artist php fil som lister opp albumene til artisten
-        fclose($nyPHPAlbum);
+        //$nyPHPAlbum=fopen($artistNavn. "Dynamisk". ".php", "a"); //Lager ny dynamisk artist php fil som lister opp albumene til artisten
+        //fclose($nyPHPAlbum);
 
         //INSERT artist inn i databasen
         $sqlINSERT="INSERT INTO Artist (Artistnavn) VALUES ('$artistNavn');";
         mysqli_query($db, $sqlINSERT);
+
+print("<meta http-equiv='refresh' content='0;url=index.php'>"); //returnerer til index
+
     }
+
        
     }
 

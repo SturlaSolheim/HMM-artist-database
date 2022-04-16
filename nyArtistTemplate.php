@@ -38,7 +38,7 @@ $artist=str_replace("artister/", "", $artistMedMappe);//Tar vekk mappevisningen,
 
 </form>
 
-<button id="slettArtister">Slett artister</button> <br> <!--Viser frem checkbokser til sletting når trykkes på -->
+<button id="slettArtister">Slett album</button> <br> <!--Viser frem checkbokser til sletting når trykkes på -->
 
 
 
@@ -51,26 +51,6 @@ $artist=str_replace("artister/", "", $artistMedMappe);//Tar vekk mappevisningen,
 //Alt under her er kode for å slette album som har blitt checket
 if(isset($_POST["submit"])){
     $valgteAlbum=$_POST["albumCheckbox"]; //Et array med alle checked checkbokser
-
-
-/*    
-//----------------------------------------------------------------------------
-//En loop for å lage et  array som inneholder albumnummer
-$albumNummer = [];
-    foreach($valgteAlbum as $alb){
-        include("dbTilkobling.php");
-        include("functions.php");
-            $sqlAlbumNummer="SELECT * FROM Album WHERE Album.AlbumNavn='$alb';";
-            $resultat=mysqli_query($db, $sqlAlbumNummer);
-            $array=mysqli_fetch_array($resultat); //Array med alle kolonnene til det første valgte albumet
-            $dbAlbumNummer=$array[$alb];//Variabel med albumnummeret til det lavgte albumet eks. 77
-
-            array_push($albumNummer, $dbAlbumNummer);//Pusher albumnummer til array
-    }
-//-------------------------------------------------------------------------------------------------------
-*/
-
-
 
  //----------------------------------------------------------------------
     foreach($valgteAlbum as $num){ //Loop for å slette spor fra database 
@@ -101,7 +81,7 @@ $albumNummer = [];
 //--------------Finner navnet på albumet fra albumNr
 
 
-                $bildelink="/bilder" ."/" . $albumNavn . "jpeg";
+                $bildelink="bilder" ."/" . $albumNavn . ".jpeg";
                 $artistlink=$albumNavn . ".php";
                 $artistDynamiskLink=$albumNavn . "Dynamisk.php";
 
@@ -117,8 +97,6 @@ print("<meta http-equiv='refresh' content='0;url=index.php'>"); //returnerer til
     
 }
 ?>
-
-
 
 
 
