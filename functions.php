@@ -20,7 +20,7 @@ function lagSangForm($antall){
     }
 
 }
-
+//WAV fil<input type='file' name='fil$r'><br>
 
 
 //Denne functionen lar deg pushe assosiativt til et array
@@ -28,4 +28,12 @@ function array_push_assoc($array, $key, $value){
     $array[$key] = $value;
     return $array;
     }
+
+
+
+
+
+
+
 ?>
+

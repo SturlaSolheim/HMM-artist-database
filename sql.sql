@@ -25,9 +25,10 @@ DROP TABLE IF EXISTS `HMMDB`.`Spor` ;
 CREATE TABLE IF NOT EXISTS `HMMDB`.`Spor` (
   `SporNr` INT NULL,
   `SporNavn` VARCHAR(45) NULL,
-  `Lengde` INT NULL,
+  `Lengde` VARCHAR(45) NULL,
   `ISRC` VARCHAR(45) NOT NULL,
   `AlbumNr` INT NULL,
+  `sporLenke` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ISRC`),
     FOREIGN KEY (`AlbumNr`)
     REFERENCES `HMMDB`.`Album` (`AlbumNr`)
