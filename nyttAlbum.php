@@ -35,7 +35,6 @@ include("start.php");
         </select> <br>
         Tittel på albumet<input type="text" name="albumNavn" required> <br>
         Albumcover<input type="file" name="albumBilde" required> <br>
-        Antall sanger <input type="number" name="antallSanger" min="1" step="1" required> <br>
         Albumnummer <input type="number" name="albumnummer" required> <br>
         <input type="submit" name="submit" value="Videre">
 
@@ -52,12 +51,10 @@ include("start.php");
 if (isset($_POST["submit"])){
 //-------------------------------------------------
 //Åpner session for å ta med informasjon om albumet videre inn i registrerSanger.php
-session_start();
-$_SESSION["antallSanger"]=$_POST["antallSanger"];
-$_SESSION["albumNavn"]=$_POST["albumNavn"];
-$_SESSION["valgtArtist"]=$_POST["valgtArtist"];
-$_SESSION["albumnummer"]=$_POST["albumnummer"];
+
 $albumTittel=$_POST["albumNavn"];
+$albumNr=$_POST["albumnummer"];
+$artistnavn=$_POST["valgtArtist"];
 //--------------------------------------------------
 
 
@@ -72,8 +69,19 @@ $nyttnavn="bilder/" .$albumTittel ."." . substr($filtype, 6);  // mappe- og filn
 
 move_uploaded_file($tmpnavn,$nyttnavn); //flytter bildefil med nytt navn inn i /bilder mappe
 
+include("dbTilkobling.php");
+$sqlINSERTalbum="INSERT INTO Album (AlbumNavn, AlbumNr, ArtistNavn, AntallSpor) VALUES ('$albumTittel', '$albumNr', '$artistnavn', 0);";
+mysqli_query($db, $sqlINSERTalbum);
 
-print("<meta http-equiv='refresh' content='0;url=registrerSanger.php'>");  //Flytter oss videre til registrerSanger.php
+
+$nyPHP=fopen($albumTittel. ".php", "a"); //Lager ny artist php fil
+
+fwrite($nyPHP, "<?php include('endreAlbumTemplate.php');?>");
+
+fclose($ntPHP);
+
+
+print("<meta http-equiv='refresh' content='0;url=$artistnavn.php'>");  //Flytter oss videre til registrerSanger.php
 
 }
 

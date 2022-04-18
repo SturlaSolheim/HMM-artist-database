@@ -11,7 +11,7 @@ include("start.php");
 
     <div class="container-forside">
         
-        <div class="item-overskrift item"><p>Våre artister</p></div>
+        <div class="item-overskrift item"><p>Våre artister branch</p></div>
 
     <?php
     include("dynamiskArtist.php"); //Denne filer lager en boks til hver artist i databasen
