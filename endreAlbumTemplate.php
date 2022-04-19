@@ -24,9 +24,10 @@ print ($artist);
 
 
 
-<form name="sporForm" action="<?php print($album);?>.php" enctype='multipart/form-data'>
+<form name="sporForm" action="<?php print ($album);?>.php" enctype='multipart/form-data'>
 
 <?php include("functions.php"); genererSpor($album);?> <br> <!-- Genererer <input> for hvert spor -->
+<input type="submit" name="submit" value="LAGRE ENDRINGER">
 
 </form>
 
@@ -35,7 +36,7 @@ print ($artist);
 <form action="<?php print($album);?>.php" method="POST">
     <input type="submit" name="nyttSpor" value="NYTT SPOR">
     <input type="submit" name="slettSpor" value="SLETT SISTE SPOR">
-    <input type="submit" name="submit" value="LAGRE ENDRINGER">
+
 
 </form>
 
@@ -100,6 +101,35 @@ print("<meta http-equiv='refresh' content='0;url=$album.php'>"); //returnerer ti
 
 //----------------------------------------------------------------------------------------------------------
 //Lagrer endringer gjort på spor
+
+if (isset($_POST["submit"])){
+    include("dbTilkobling.php");
+
+        $sqlSELECTendring="SELECT * FROM Spor WHERE Spor.AlbumNr='$globalAlbumNr';";
+        $resultatEndring=mysqli_query($db, $sqlSELECTendring);
+        $antallRaderEndring=mysqli_num_rows($resultatEndring);
+
+        $sportittel=$_POST["tittel$r"];
+        $sporlengde=$_POST["lengde$r"];
+        $sporisrc=$_POST["isrc$r"];
+
+
+
+        for ($r=1;$r<=$antallRaderEndring;$r++){
+            $sportittel=$_POST["tittel$r"];
+            $sporlengde=$_POST["lengde$r"];
+            $sporisrc=$_POST["isrc$r"];
+
+            $sqlENDRE="UPDATE Spor SET SporNavn = '$sportittel', Lengde = '$sporlengde', ISRC = '$sporisrc' WHERE Spor.AlbumNr='$globalAlbumNr' AND Spor.SporNr='$r';";
+            mysqli_query($db, $sqlENDRE);
+
+            print ($sportittel);
+        }
+
+
+}
+
+//------------------------------------------------------------------------------------------------------------
 
 
 }
