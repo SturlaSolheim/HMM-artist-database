@@ -42,26 +42,24 @@ function genererSpor($album){
     //---------------------Finner informasjon om sporene
     $sqlSpor="SELECT * FROM Spor WHERE Spor.AlbumNr='$albumNr';";
     $resultatSpor=mysqli_query($db, $sqlSpor);
-    $radSpor=mysqli_fetch_array($resultatSpor);
+
 
 
     //-------------------------Loopen som genererer spor
     for ($r=0;$r<$antallSpor;$r++) {
         $radSpor=mysqli_fetch_array($resultatSpor);
 
-        $sporNr=$radSpor["SporNr"];
+        $sporNr=$r+1;
         $sporNavn=$radSpor["SporNavn"];
         $lengde=$radSpor["Lengde"];
         $isrc=$radSpor["ISRC"];
 
         print   ("<h2>Spor nr.$sporNr</h2> <br>
-                <form name='spor$sporNr' action='$album.php' enctype='multipart/form-data'>
-                Sportittel <input type='text' value='$sporNavn'><br>
-                Lengde<input type='text' value='$lengde'><br>
-                ISRC<input type='text' value='$isrc'><br>
-                <input type='submit' value='Lagre'><br>");
-
-
+                Sportittel <input type='text' value='$sporNavn' name='tittel$sporNr'> <br>
+                Lengde<input type='text' value='$lengde' name='lengde$sporNr'><br>
+                ISRC<input type='text' value='$isrc' name='isrc$sporNr'><br>
+                Lydfil<input type='file' name='lydfil$sporNr'><br>
+                <input type='submit' value='Lagre' name='submit'><br>");
 
     }
     //--------------------------
