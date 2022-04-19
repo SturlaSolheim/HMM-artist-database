@@ -17,8 +17,10 @@ $album=str_replace("artister/", "", $artistMedMappe);//Tar vekk mappevisningen, 
 print ($artist);
 ?>
 
+<h2> <a href="index.php">Tilbake</a></h2>
 
 <h1>Dette albumet heter <?php print ($album);?></h1> <br>
+<img src="/bilder/<?php print ($album);?>.jpeg"  style='width:200px;height:200px;'>
 
 
 
@@ -33,6 +35,7 @@ print ($artist);
 <form action="<?php print($album);?>.php" method="POST">
     <input type="submit" name="nyttSpor" value="NYTT SPOR">
     <input type="submit" name="slettSpor" value="SLETT SISTE SPOR">
+    <input type="submit" name="submit" value="LAGRE ENDRINGER">
 
 </form>
 
@@ -62,14 +65,14 @@ if (isset($_POST["nyttSpor"])){
 print("<meta http-equiv='refresh' content='0;url=$album.php'>"); //returnerer til albumsiden
 
 }
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
 
 
 
 
 
 
-//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
 //Sletter siste spor
 if (isset($_POST["slettSpor"])){
     include("dbTilkobling.php");
@@ -89,6 +92,14 @@ if (isset($_POST["slettSpor"])){
     mysqli_query($db, $sqlSETned);
 
 print("<meta http-equiv='refresh' content='0;url=$album.php'>"); //returnerer til albumsiden
+//--------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//----------------------------------------------------------------------------------------------------------
+//Lagrer endringer gjort på spor
 
 
 }

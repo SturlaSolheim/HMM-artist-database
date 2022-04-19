@@ -58,8 +58,7 @@ function genererSpor($album){
                 Sportittel <input type='text' value='$sporNavn' name='tittel$sporNr'> <br>
                 Lengde<input type='text' value='$lengde' name='lengde$sporNr'><br>
                 ISRC<input type='text' value='$isrc' name='isrc$sporNr'><br>
-                Lydfil<input type='file' name='lydfil$sporNr'><br>
-                <input type='submit' value='Lagre' name='submit'><br>");
+                Lydfil<input type='file' name='lydfil$sporNr'><br>");
 
     }
     //--------------------------
