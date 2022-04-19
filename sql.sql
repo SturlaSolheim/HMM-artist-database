@@ -1,14 +1,4 @@
-DROP TABLE IF EXISTS `HMMDB`.`Spor` ;
-
 DROP TABLE IF EXISTS `HMMDB`.`Artist` ;
-
-DROP TABLE IF EXISTS `HMMDB`.`Album` ;
-
-DROP TABLE IF EXISTS `HMMDB`.`Bruker` ;
-
-
-
-
 
 CREATE TABLE IF NOT EXISTS `HMMDB`.`Artist` (
   `Artistnavn` VARCHAR(45) UNIQUE NOT NULL,
@@ -17,12 +7,12 @@ CREATE TABLE IF NOT EXISTS `HMMDB`.`Artist` (
 );
 
 
+DROP TABLE IF EXISTS `HMMDB`.`Album` ;
 
 CREATE TABLE IF NOT EXISTS `HMMDB`.`Album` (
   `AlbumNavn` INT NULL,
   `AlbumNr` INT NOT NULL,
   `Artistnavn` VARCHAR(45) NULL,
-  `AntallSpor` INT NULL,
   PRIMARY KEY (`AlbumNr`),
 
     FOREIGN KEY (`Artistnavn`)
@@ -30,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `HMMDB`.`Album` (
 );
 
 
-
+DROP TABLE IF EXISTS `HMMDB`.`Spor` ;
 
 CREATE TABLE IF NOT EXISTS `HMMDB`.`Spor` (
   `SporNr` INT NULL,
@@ -46,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `HMMDB`.`Spor` (
 
 
 
+DROP TABLE IF EXISTS `HMMDB`.`Bruker` ;
 
 CREATE TABLE IF NOT EXISTS `HMMDB`.`Bruker` (
   `Brukernavn` VARCHAR(45),
@@ -53,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `HMMDB`.`Bruker` (
   PRIMARY KEY (`Brukernavn`),
 );
 
-/*
+
 CREATE TABLE IF NOT EXISTS `HMMDB`.`Lenke` (
   `Artistside` VARCHAR(45) NULL,
   `Albumside` VARCHAR(45) NULL,
@@ -67,6 +58,6 @@ CREATE TABLE IF NOT EXISTS `HMMDB`.`Lenke` (
 
 
 
-*/
+/**/
 
 
