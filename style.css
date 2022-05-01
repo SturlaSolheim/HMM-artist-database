@@ -14,9 +14,25 @@ body {
     width: auto;
    justify-content: center;
    align-content: center;
-
-
 }
+
+.container-spor {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 5px;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-top: 5vw;
+    height: 100vh;
+    width: auto;
+   justify-content: center;
+   align-content: center;
+}
+
+
+
+
 .item-overskrift{
     grid-column-start: 1;
     grid-column-end: 4;
@@ -99,3 +115,33 @@ h1 {
     text-align: center;
 }
 
+
+.sporboks {
+    border-color: black;
+    border-radius: 23px;
+    border-style: groove;
+    background-color: aliceblue;
+    padding-left: 2em;
+}
+
+.albumsidebilde{
+    border-color: black;
+    border-radius: 23px;
+    border-style: groove;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.lydfil {
+    border-color: black;
+    border-radius: 23px;
+    border-style: groove;
+    background-color: aliceblue;
+    padding-left: 2em;
+}
+
+.sporboks {
+
+}

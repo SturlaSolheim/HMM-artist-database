@@ -54,11 +54,15 @@ function genererSpor($album){
         $lengde=$radSpor["Lengde"];
         $isrc=$radSpor["ISRC"];
 
-        print   ("<h2>Spor nr.$sporNr</h2> <br>
+        print   ("<div class='sporboks'><h2>Spor nr.$sporNr</h2> <br>
                 Sportittel <input type='text' value='$sporNavn' name='tittel$sporNr'> <br>
                 Lengde<input type='text' value='$lengde' name='lengde$sporNr'><br>
                 ISRC<input type='text' value='$isrc' name='isrc$sporNr'><br>
                 Lydfil <input type='file' name='fil$sporNr'> <br>");
+                
+                $link="lydfiler/spor" . $sporNr . "album" . $albumNr .".wav";
+
+            print ("<audio controls> <source src='$link' type='audio/wav'></audio></div>");
 
                 
 

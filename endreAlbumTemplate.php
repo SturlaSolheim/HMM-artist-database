@@ -20,44 +20,36 @@ print ($artist);
 <h2> <a href="index.php">Tilbake</a></h2>
 
 <h1>Dette albumet heter <?php print ($album);?></h1> <br>
-<img src="/bilder/<?php print ($album);?>.jpeg"  style='width:200px;height:auto;'>
-
-
-
-<form name="sporForm" action="<?php print ($album);?>.php" method="POST" enctype="multipart/form-data">
-    <?php include("functions.php"); genererSpor($album);?> <br> <!-- Genererer <input> for hvert spor -->
-    <input type="submit" name="submit" value="LAGRE ENDRINGER">
-</form>
+<img class="albumsidebilde" src="/bilder/<?php print ($album);?>.jpeg"  style='width:200px;height:auto;'>
 
 
 
 
+    <form name="sporForm" action="<?php print ($album);?>.php" method="POST" enctype="multipart/form-data">
+    <div class="container-spor">
+        <?php include("functions.php"); genererSpor($album);?> <br> <!-- Genererer <input> for hvert spor -->
+    </div>
+        <input type="submit" name="submit" value="LAGRE ENDRINGER">
+    </form>
+    
 
-<form action="<?php print($album);?>.php" method="POST">
-    <input type="submit" name="nyttSpor" value="NYTT SPOR">
-    <input type="submit" name="slettSpor" value="SLETT SISTE SPOR">
-</form>
 
 
-<!-- Printer ut allle lydfilene -->
-<?php
-        include("dbTilkobling.php");
 
-        //Finner antall spor albumet har
-        $sqlAntallSpor="SELECT * FROM Album WHERE Album.AlbumNr='$globalAlbumNr';";
-        $resultatAntallSpor=mysqli_query($db, $sqlAntallSpor);
-        $radAntallSpor=mysqli_fetch_array($resultatAntallSpor);
-        $antallSpor=$radAntallSpor["AntallSpor"];
 
-        if ($antallSpor>0){
-        for ($r=1;$r<=$antallSpor;$r++){
-            $link="lydfiler/spor" . $r . "album" . $globalAlbumNr .".wav";
 
-            print ("<audio controls> <source src='$link' type='audio/wav'></audio> <br>");
-        }
-    }
-    ?>
+
 <!-- ----------------------------------------------------------------- -->
+<form action="<?php print($album);?>.php" method="POST">
+        <input type="submit" name="nyttSpor" value="NYTT SPOR">
+        <input type="submit" name="slettSpor" value="SLETT SISTE SPOR">
+    </form>
+
+<br>
+
+
+
+
 
 
 
@@ -132,6 +124,9 @@ if (isset($_POST["submit"])){
         $resultatEndring=mysqli_query($db, $sqlSELECTendring);
         $antallRaderEndring=mysqli_num_rows($resultatEndring);
 
+        $lengdeKalkulert=[];
+        
+
 
         for ($r=1;$r<=$antallRaderEndring;$r++){
             $sportittel=$_POST["tittel$r"];
@@ -144,12 +139,19 @@ if (isset($_POST["submit"])){
             $tmpnavn=$_FILES ["fil$r"]["tmp_name"];    // midlertidig navn på opplastet fil 
             $nyttnavn="lydfiler/"."spor" .$r ."album" . $globalAlbumNr ."." . "wav";  // mappe- og filnavn på opplastet fil 
 
+            $sekunder=round($filstorrelse/288);
+            $min=round($sekunder/60);
+            $sekunderPluss=$sekunder-($min*60);
+            $tidTotalt=$min . ":" . $sekunderPluss;
+            array_push($lengdeKalkulert, $tidTotalt);
+
             move_uploaded_file($tmpnavn,$nyttnavn);
         }
 
         for ($r=1;$r<=$antallRaderEndring;$r++){
+            $l=$r-1;
             $sportittel=$_POST["tittel$r"];
-            $sporlengde=$_POST["lengde$r"];
+            $sporlengde=$lengdeKalkulert[$l];
             $sporisrc=$_POST["isrc$r"];
 
             $sqlENDRE .="UPDATE Spor SET SporNavn = '$sportittel', Lengde = '$sporlengde', ISRC = '$sporisrc' WHERE Spor.AlbumNr='$globalAlbumNr' AND Spor.SporNr='$r';";
