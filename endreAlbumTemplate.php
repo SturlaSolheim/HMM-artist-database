@@ -16,33 +16,35 @@ $album=str_replace("artister/", "", $artistMedMappe);//Tar vekk mappevisningen, 
 
 print ($artist);
 ?>
+ <form name="sporForm" action="<?php print ($album);?>.php" method="POST" enctype="multipart/form-data">
+
+
+
 
 <h2> <a href="index.php">Tilbake</a></h2>
+<div class="container-spor">
 
+<div class="h2album">
 <h1>Dette albumet heter <?php print ($album);?></h1> <br>
+</div>
+
+<div class="albumCover">
 <img class="albumsidebilde" src="/bilder/<?php print ($album);?>.jpeg"  style='width:200px;height:auto;'>
+</div>
 
 
 
+   
 
-    <form name="sporForm" action="<?php print ($album);?>.php" method="POST" enctype="multipart/form-data">
-    <div class="container-spor">
-        <?php include("functions.php"); genererSpor($album);?> <br> <!-- Genererer <input> for hvert spor -->
-    </div>
-        <input type="submit" name="submit" value="LAGRE ENDRINGER">
-    </form>
-    
-
-
-
-
-
-
+        <?php include("functions.php"); genererSpor($album);?>  <!-- Genererer <input> for hvert spor -->
 
 <!-- ----------------------------------------------------------------- -->
-<form action="<?php print($album);?>.php" method="POST">
+<div class="knapper">
+        <input type="submit" name="submit" value="LAGRE ENDRINGER">
         <input type="submit" name="nyttSpor" value="NYTT SPOR">
         <input type="submit" name="slettSpor" value="SLETT SISTE SPOR">
+</div>
+</div>
     </form>
 
 <br>

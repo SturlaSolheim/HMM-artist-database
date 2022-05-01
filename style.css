@@ -24,10 +24,39 @@ body {
     margin-left: 3vw;
     margin-right: 3vw;
     margin-top: 5vw;
-    height: 100vh;
+    height: auto;
     width: auto;
    justify-content: center;
    align-content: center;
+}
+
+.h2album {
+grid-column: 1 / span 2;
+border-color: black;
+border-radius: 23px;
+border-style: groove;
+background-color: rgb(255, 240, 247);
+}
+
+.knapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 5px;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-top: 0vw;
+    height: auto;
+    width: auto;
+   justify-content: center;
+   align-content: center;
+   border-color: black;
+   border-radius: 23px;
+   border-style: groove;
+   background-color: rgb(240, 255, 242);
+   padding-left: 3em;
+   padding-right: 3em;
+
 }
 
 
