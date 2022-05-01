@@ -60,6 +60,8 @@ function genererSpor($album){
                 ISRC<input type='text' value='$isrc' name='isrc$sporNr'><br>
                 Lydfil <input type='file' name='fil$sporNr'> <br>");
 
+                
+
     }
     //--------------------------
 

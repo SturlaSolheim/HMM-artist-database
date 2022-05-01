@@ -39,6 +39,27 @@ print ($artist);
 </form>
 
 
+<!-- Printer ut allle lydfilene -->
+<?php
+        include("dbTilkobling.php");
+
+        //Finner antall spor albumet har
+        $sqlAntallSpor="SELECT * FROM Album WHERE Album.AlbumNr='$globalAlbumNr';";
+        $resultatAntallSpor=mysqli_query($db, $sqlAntallSpor);
+        $radAntallSpor=mysqli_fetch_array($resultatAntallSpor);
+        $antallSpor=$radAntallSpor["AntallSpor"];
+
+        if ($antallSpor>0){
+        for ($r=1;$r<=$antallSpor;$r++){
+            $link="lydfiler/spor" . $r . "album" . $globalAlbumNr .".wav";
+
+            print ("<audio controls> <source src='$link' type='audio/wav'></audio> <br>");
+        }
+    }
+    ?>
+<!-- ----------------------------------------------------------------- -->
+
+
 
 <?php
 //-----------------------------------------------------------------------
@@ -83,6 +104,9 @@ if (isset($_POST["slettSpor"])){
         $antallSpor=$radAntallSpor["AntallSpor"];
 
 if ($antallSpor>0){ //passer på at databasen ikke kan vise negative verdier på antall spor
+    $lydfil="lydfiler/spor" . $antallSpor . "album" . $globalAlbumNr . ".wav";
+    unlink($lydfil);
+
     //Sletter sporet
     $sqlSlett="DELETE FROM Spor WHERE Spor.SporNr='$antallSpor' AND Spor.AlbumNR='$globalAlbumNr';";
     mysqli_query($db, $sqlSlett);
@@ -118,7 +142,7 @@ if (isset($_POST["submit"])){
             $filtype=$_FILES ["fil$r"]["type"];  // filtype på opplastet fil 
             $filstorrelse=$_FILES ["fil$r"]["size"];  // filstørrelse på opplastet fil  
             $tmpnavn=$_FILES ["fil$r"]["tmp_name"];    // midlertidig navn på opplastet fil 
-            $nyttnavn="lydfiler/".$r .$sportittel . $globalAlbumNr ."." . "wav";  // mappe- og filnavn på opplastet fil 
+            $nyttnavn="lydfiler/"."spor" .$r ."album" . $globalAlbumNr ."." . "wav";  // mappe- og filnavn på opplastet fil 
 
             move_uploaded_file($tmpnavn,$nyttnavn);
         }
