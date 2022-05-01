@@ -20,15 +20,13 @@ print ($artist);
 <h2> <a href="index.php">Tilbake</a></h2>
 
 <h1>Dette albumet heter <?php print ($album);?></h1> <br>
-<img src="/bilder/<?php print ($album);?>.jpeg"  style='width:200px;height:200px;'>
+<img src="/bilder/<?php print ($album);?>.jpeg"  style='width:200px;height:auto;'>
 
 
 
-<form name="sporForm" action="<?php print ($album);?>.php" enctype='multipart/form-data'>
-
-<?php include("functions.php"); genererSpor($album);?> <br> <!-- Genererer <input> for hvert spor -->
-<input type="submit" name="submit" value="LAGRE ENDRINGER">
-
+<form name="sporForm" action="<?php print ($album);?>.php" method="POST">
+    <?php include("functions.php"); genererSpor($album);?> <br> <!-- Genererer <input> for hvert spor -->
+    <input type="submit" name="submit" value="LAGRE ENDRINGER">
 </form>
 
 
@@ -36,8 +34,6 @@ print ($artist);
 <form action="<?php print($album);?>.php" method="POST">
     <input type="submit" name="nyttSpor" value="NYTT SPOR">
     <input type="submit" name="slettSpor" value="SLETT SISTE SPOR">
-
-
 </form>
 
 
@@ -95,7 +91,7 @@ if (isset($_POST["slettSpor"])){
 print("<meta http-equiv='refresh' content='0;url=$album.php'>"); //returnerer til albumsiden
 //--------------------------------------------------------------------------------------------------------
 
-
+}
 
 
 
@@ -109,30 +105,23 @@ if (isset($_POST["submit"])){
         $resultatEndring=mysqli_query($db, $sqlSELECTendring);
         $antallRaderEndring=mysqli_num_rows($resultatEndring);
 
-        $sportittel=$_POST["tittel$r"];
-        $sporlengde=$_POST["lengde$r"];
-        $sporisrc=$_POST["isrc$r"];
-
-
-
         for ($r=1;$r<=$antallRaderEndring;$r++){
             $sportittel=$_POST["tittel$r"];
             $sporlengde=$_POST["lengde$r"];
             $sporisrc=$_POST["isrc$r"];
 
-            $sqlENDRE="UPDATE Spor SET SporNavn = '$sportittel', Lengde = '$sporlengde', ISRC = '$sporisrc' WHERE Spor.AlbumNr='$globalAlbumNr' AND Spor.SporNr='$r';";
-            mysqli_query($db, $sqlENDRE);
-
-            print ($sportittel);
+            $sqlENDRE .="UPDATE Spor SET SporNavn = '$sportittel', Lengde = '$sporlengde', ISRC = '$sporisrc' WHERE Spor.AlbumNr='$globalAlbumNr' AND Spor.SporNr='$r';";
         }
+        mysqli_multi_query($db, $sqlENDRE);
 
+print("<meta http-equiv='refresh' content='0;url=$album.php'>"); //returnerer til albumsiden
 
 }
 
 //------------------------------------------------------------------------------------------------------------
 
 
-}
+
 ?>
 
 
