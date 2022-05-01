@@ -24,10 +24,12 @@ print ($artist);
 
 
 
-<form name="sporForm" action="<?php print ($album);?>.php" method="POST">
+<form name="sporForm" action="<?php print ($album);?>.php" method="POST" enctype="multipart/form-data">
     <?php include("functions.php"); genererSpor($album);?> <br> <!-- Genererer <input> for hvert spor -->
     <input type="submit" name="submit" value="LAGRE ENDRINGER">
 </form>
+
+
 
 
 
@@ -80,6 +82,7 @@ if (isset($_POST["slettSpor"])){
         $radAntallSpor=mysqli_fetch_array($resultatAntallSpor);
         $antallSpor=$radAntallSpor["AntallSpor"];
 
+if ($antallSpor>0){ //passer på at databasen ikke kan vise negative verdier på antall spor
     //Sletter sporet
     $sqlSlett="DELETE FROM Spor WHERE Spor.SporNr='$antallSpor' AND Spor.AlbumNR='$globalAlbumNr';";
     mysqli_query($db, $sqlSlett);
@@ -87,6 +90,7 @@ if (isset($_POST["slettSpor"])){
     //Reduserer antall spor med 1 
     $sqlSETned="UPDATE Album SET AntallSpor = AntallSpor - 1 WHERE AlbumNavn='$album';";
     mysqli_query($db, $sqlSETned);
+}
 
 print("<meta http-equiv='refresh' content='0;url=$album.php'>"); //returnerer til albumsiden
 //--------------------------------------------------------------------------------------------------------
@@ -97,13 +101,27 @@ print("<meta http-equiv='refresh' content='0;url=$album.php'>"); //returnerer ti
 
 //----------------------------------------------------------------------------------------------------------
 //Lagrer endringer gjort på spor
-
 if (isset($_POST["submit"])){
     include("dbTilkobling.php");
 
         $sqlSELECTendring="SELECT * FROM Spor WHERE Spor.AlbumNr='$globalAlbumNr';";
         $resultatEndring=mysqli_query($db, $sqlSELECTendring);
         $antallRaderEndring=mysqli_num_rows($resultatEndring);
+
+
+        for ($r=1;$r<=$antallRaderEndring;$r++){
+            $sportittel=$_POST["tittel$r"];
+            $sporlengde=$_POST["lengde$r"];
+            $sporisrc=$_POST["isrc$r"];
+
+            $filnavn=$_FILES ["fil$r"]["name"];  // filnavn på opplastet fil  
+            $filtype=$_FILES ["fil$r"]["type"];  // filtype på opplastet fil 
+            $filstorrelse=$_FILES ["fil$r"]["size"];  // filstørrelse på opplastet fil  
+            $tmpnavn=$_FILES ["fil$r"]["tmp_name"];    // midlertidig navn på opplastet fil 
+            $nyttnavn="lydfiler/".$r .$sportittel . $globalAlbumNr ."." . "wav";  // mappe- og filnavn på opplastet fil 
+
+            move_uploaded_file($tmpnavn,$nyttnavn);
+        }
 
         for ($r=1;$r<=$antallRaderEndring;$r++){
             $sportittel=$_POST["tittel$r"];
