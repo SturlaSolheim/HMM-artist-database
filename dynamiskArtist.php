@@ -30,7 +30,7 @@ $artistVistNavn=str_replace("_", " ", $artist);
 
 //printen for hver artist
     print ("<div class='item-$r item'> <p>
-    <a href='$artistLink'> <img src='/bilder/$artist.jpeg' style='width:200px;height:200px;'> </a>
+    <a href='$artistLink'> <img src='/bilder/$artist.jpeg' style='width:200px;height:auto;'> </a>
     <br> $artistVistNavn</p> <br> 
     <input class='check' type='checkbox' style='display: none;' name='artistCheckbox[]' value='$artist'> </div>");
 }

@@ -14,9 +14,54 @@ body {
     width: auto;
    justify-content: center;
    align-content: center;
+}
 
+.container-spor {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 5px;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-top: 5vw;
+    height: auto;
+    width: auto;
+   justify-content: center;
+   align-content: center;
+}
+
+.h2album {
+grid-column: 1 / span 2;
+border-color: black;
+border-radius: 23px;
+border-style: groove;
+background-color: rgb(255, 240, 247);
+}
+
+.knapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 5px;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-top: 0vw;
+    height: auto;
+    width: auto;
+   justify-content: center;
+   align-content: center;
+   border-color: black;
+   border-radius: 23px;
+   border-style: groove;
+   background-color: rgb(240, 255, 242);
+   padding-left: 3em;
+   padding-right: 3em;
 
 }
+
+
+
+
 .item-overskrift{
     grid-column-start: 1;
     grid-column-end: 4;
@@ -99,3 +144,33 @@ h1 {
     text-align: center;
 }
 
+
+.sporboks {
+    border-color: black;
+    border-radius: 23px;
+    border-style: groove;
+    background-color: aliceblue;
+    padding-left: 2em;
+}
+
+.albumsidebilde{
+    border-color: black;
+    border-radius: 23px;
+    border-style: groove;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.lydfil {
+    border-color: black;
+    border-radius: 23px;
+    border-style: groove;
+    background-color: aliceblue;
+    padding-left: 2em;
+}
+
+.sporboks {
+
+}
