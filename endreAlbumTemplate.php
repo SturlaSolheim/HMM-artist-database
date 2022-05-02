@@ -127,7 +127,7 @@ if (isset($_POST["submit"])){
         $antallRaderEndring=mysqli_num_rows($resultatEndring);
 
         $lengdeKalkulert=[];
-        
+        $sqlENDRE="";
 
 
         for ($r=1;$r<=$antallRaderEndring;$r++){
@@ -141,13 +141,17 @@ if (isset($_POST["submit"])){
             $tmpnavn=$_FILES ["fil$r"]["tmp_name"];    // midlertidig navn på opplastet fil 
             $nyttnavn="lydfiler/"."spor" .$r ."album" . $globalAlbumNr ."." . "wav";  // mappe- og filnavn på opplastet fil 
 
-            $sekunder=round($filstorrelse/288);
-            $min=round($sekunder/60);
-            $sekunderPluss=$sekunder-($min*60);
-            $tidTotalt=$min . ":" . $sekunderPluss;
-            array_push($lengdeKalkulert, $tidTotalt);
+            //---------Regner ut hvor lang filen er og laster det opp til databasen
+            if ($filstorrelse>0){
+                $sekunder=round($filstorrelse/288000);
+                $min=round($sekunder/60);
+                $sekunderPluss=$sekunder-($min*60);
+                $tidTotalt=$min . ":" . $sekunderPluss;
+                array_push($lengdeKalkulert, $tidTotalt);
+                $sqlENDRE .="UPDATE Spor SET Lengde = '$tidTotalt' WHERE Spor.AlbumNr='$globalAlbumNr' AND Spor.SporNr='$r';";
 
-            move_uploaded_file($tmpnavn,$nyttnavn);
+                move_uploaded_file($tmpnavn,$nyttnavn);
+            }
         }
 
         for ($r=1;$r<=$antallRaderEndring;$r++){
@@ -156,7 +160,7 @@ if (isset($_POST["submit"])){
             $sporlengde=$lengdeKalkulert[$l];
             $sporisrc=$_POST["isrc$r"];
 
-            $sqlENDRE .="UPDATE Spor SET SporNavn = '$sportittel', Lengde = '$sporlengde', ISRC = '$sporisrc' WHERE Spor.AlbumNr='$globalAlbumNr' AND Spor.SporNr='$r';";
+            $sqlENDRE .="UPDATE Spor SET SporNavn = '$sportittel', ISRC = '$sporisrc' WHERE Spor.AlbumNr='$globalAlbumNr' AND Spor.SporNr='$r';";
         }
         mysqli_multi_query($db, $sqlENDRE);
 
